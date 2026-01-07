@@ -88,7 +88,8 @@ congressional-districts/
 ## Sample Data
 
 The application currently includes 10 sample districts:
-- **California**: CA-01 (R+11*), CA-12 (D+35*)
+- **Montana**: MT-01 (R+11*, Rep. Ryan Zinke)
+- **California**: CA-12 (D+35*)
 - **Texas**: TX-01 (R+26*), TX-35 (D+15*)
 - **New York**: NY-03 (EVEN ✓), NY-14 (D+19 ✓)
 - **Florida**: FL-01 (R+19*, Rep. Jimmy Patronis), FL-20 (D+22*)
@@ -96,6 +97,8 @@ The application currently includes 10 sample districts:
 - **Ohio**: OH-15 (R+7*)
 
 *Note: PVI values marked with ✓ are verified as accurate per 2025 Cook PVI. Values marked with * are approximations and will be replaced with accurate 2025 Cook PVI data when implementing the full 435-district dataset.*
+
+*Note: CA-01 (Rep. Doug LaMalfa) was removed from sample data following Rep. LaMalfa's passing on January 5, 2026. The seat is currently vacant.*
 
 Each district includes:
 - Representative name and party

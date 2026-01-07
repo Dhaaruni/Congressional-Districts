@@ -1,28 +1,28 @@
 {
-  "_note": "Sample data for 10 districts. PVI values marked as verified (NY-03: EVEN, NY-14: D+19, PA-01: D+1) are accurate as of 2025 Cook PVI. Other PVI values are approximations and will be replaced with accurate data when implementing the full 435-district dataset.",
+  "_note": "Sample data for 10 districts. CA-01 (Rep. Doug LaMalfa) was replaced with MT-01 following Rep. LaMalfa's passing on January 5, 2026. PVI values marked as verified (NY-03: EVEN, NY-14: D+19, PA-01: D+1) are accurate as of 2025 Cook PVI. Other PVI values are approximations and will be replaced with accurate data when implementing the full 435-district dataset.",
   "districts": [
     {
-      "id": "CA-01",
-      "state": "California",
+      "id": "MT-01",
+      "state": "Montana",
       "district": 1,
-      "name": "California's 1st congressional district",
+      "name": "Montana's 1st congressional district",
       "party": "Republican",
-      "representative": "Doug LaMalfa",
+      "representative": "Ryan Zinke",
       "pvi": "R+11",
       "pvi_numeric": 11,
       "demographics": {
-        "population": 761061,
-        "median_income": 53000,
-        "white_pct": 75.4,
-        "black_pct": 1.2,
-        "hispanic_pct": 14.5,
-        "asian_pct": 4.2,
-        "bachelor_degree_pct": 22.3
+        "population": 542704,
+        "median_income": 58000,
+        "white_pct": 88.2,
+        "black_pct": 0.6,
+        "hispanic_pct": 4.1,
+        "asian_pct": 0.8,
+        "bachelor_degree_pct": 32.7
       },
       "elections": {
-        "2024": {"dem_pct": 37.2, "rep_pct": 62.8, "margin": 25.6, "turnout": 310000},
-        "2022": {"dem_pct": 36.1, "rep_pct": 63.9, "margin": 27.8, "turnout": 245000},
-        "2020": {"dem_pct": 39.4, "rep_pct": 60.6, "margin": 21.2, "turnout": 342000}
+        "2024": {"dem_pct": 38.5, "rep_pct": 61.5, "margin": 23.0, "turnout": 285000},
+        "2022": {"dem_pct": 40.8, "rep_pct": 59.2, "margin": 18.4, "turnout": 265000},
+        "2020": {"dem_pct": 44.2, "rep_pct": 55.8, "margin": 11.6, "turnout": 315000}
       }
     },
     {
