@@ -1,0 +1,177 @@
+/* Table Container */
+.table-container {
+    padding: 20px;
+    min-height: 600px;
+}
+
+/* DataTables Customization */
+#districts-table {
+    width: 100% !important;
+}
+
+/* Party-colored rows */
+#districts-table tbody tr.party-republican {
+    background-color: rgba(233, 29, 14, 0.1);
+}
+
+#districts-table tbody tr.party-republican:hover {
+    background-color: rgba(233, 29, 14, 0.2) !important;
+}
+
+#districts-table tbody tr.party-democratic {
+    background-color: rgba(35, 32, 102, 0.1);
+}
+
+#districts-table tbody tr.party-democratic:hover {
+    background-color: rgba(35, 32, 102, 0.2) !important;
+}
+
+/* Selected/Highlighted row */
+#districts-table tbody tr.selected {
+    background-color: #fffacd !important;
+    font-weight: bold;
+}
+
+#districts-table tbody tr.selected:hover {
+    background-color: #fff9b3 !important;
+}
+
+/* Table header styling */
+#districts-table thead th {
+    background-color: var(--text-primary);
+    color: white;
+    font-weight: 600;
+    padding: 12px 8px;
+    text-align: left;
+    cursor: pointer;
+}
+
+#districts-table thead th:hover {
+    background-color: #555;
+}
+
+/* Table cell styling */
+#districts-table tbody td {
+    padding: 10px 8px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* Party badges in table */
+.party-badge {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 0.85em;
+    font-weight: 600;
+    color: white;
+}
+
+.party-badge.republican {
+    background-color: var(--republican-color);
+}
+
+.party-badge.democratic {
+    background-color: var(--democratic-color);
+}
+
+/* PVI styling */
+.pvi-value {
+    font-weight: 600;
+}
+
+.pvi-value.republican {
+    color: var(--republican-color);
+}
+
+.pvi-value.democratic {
+    color: var(--democratic-color);
+}
+
+.pvi-value.even {
+    color: var(--neutral-color);
+}
+
+/* DataTables controls */
+.dataTables_wrapper .dataTables_length,
+.dataTables_wrapper .dataTables_filter,
+.dataTables_wrapper .dataTables_info,
+.dataTables_wrapper .dataTables_paginate {
+    margin: 10px 0;
+}
+
+.dataTables_wrapper .dataTables_filter input {
+    padding: 5px 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    margin-left: 5px;
+}
+
+.dataTables_wrapper .dataTables_length select {
+    padding: 5px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    margin: 0 5px;
+}
+
+/* Pagination */
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    padding: 5px 10px;
+    margin: 0 2px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background: white;
+    cursor: pointer;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+    background: var(--bg-color);
+    border-color: var(--text-primary);
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.current {
+    background: var(--democratic-color);
+    color: white;
+    border-color: var(--democratic-color);
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Sorting icons */
+#districts-table thead th.sorting::before,
+#districts-table thead th.sorting_asc::before,
+#districts-table thead th.sorting_desc::before {
+    opacity: 0.3;
+}
+
+#districts-table thead th.sorting_asc::after,
+#districts-table thead th.sorting_desc::after {
+    opacity: 1;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .table-container {
+        padding: 10px;
+        max-height: 500px;
+    }
+
+    #districts-table {
+        font-size: 0.85em;
+    }
+
+    #districts-table thead th,
+    #districts-table tbody td {
+        padding: 8px 4px;
+    }
+
+    /* Hide less important columns on mobile */
+    #districts-table th:nth-child(6),
+    #districts-table td:nth-child(6),
+    #districts-table th:nth-child(7),
+    #districts-table td:nth-child(7) {
+        display: none;
+    }
+}
