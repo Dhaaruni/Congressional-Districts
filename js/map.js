@@ -13,6 +13,7 @@ export class MapManager {
 
         // Approximate coordinates for state centers (for marker fallback)
         this.stateCoords = {
+            'Montana': [46.8797, -110.3626],
             'California': [36.7783, -119.4179],
             'Texas': [31.9686, -99.9018],
             'New York': [42.1657, -74.9481],
