@@ -46,81 +46,106 @@ export class MapManager {
         console.log('Map initialized');
     }
 
-    updateDistricts(districts, vizMode = 'party') {
+    async updateDistricts(districts, vizMode = 'party') {
         this.filteredDistricts = districts;
         this.vizMode = vizMode;
 
-        // Clear existing markers
+        // Clear existing layers
+        if (this.geoJsonLayer) {
+            this.geoJsonLayer.remove();
+            this.geoJsonLayer = null;
+        }
         if (this.markersLayer) {
             this.markersLayer.clearLayers();
         }
 
-        // For now, use markers since we don't have GeoJSON
-        // Group districts by state to avoid overlapping markers
-        const districtsByState = {};
-        districts.forEach(district => {
-            if (!districtsByState[district.state]) {
-                districtsByState[district.state] = [];
-            }
-            districtsByState[district.state].push(district);
+        // Load GeoJSON if not already loaded
+        if (!this.dataLoader.geoJsonData) {
+            await this.dataLoader.loadGeoJSON();
+        }
+
+        // Create district ID set for filtering
+        const districtIds = new Set(districts.map(d => d.id));
+
+        // Create district data lookup
+        const districtDataMap = {};
+        districts.forEach(d => {
+            districtDataMap[d.id] = d;
         });
 
-        // Add markers for each state's districts
-        Object.entries(districtsByState).forEach(([state, stateDistricts]) => {
-            const baseCoords = this.stateCoords[state];
-            if (!baseCoords) return;
+        // Render GeoJSON boundaries
+        this.geoJsonLayer = L.geoJSON(this.dataLoader.geoJsonData, {
+            filter: (feature) => {
+                // Only show filtered districts
+                return districtIds.has(feature.properties.district);
+            },
+            style: (feature) => {
+                const districtId = feature.properties.district;
+                const district = districtDataMap[districtId];
 
-            stateDistricts.forEach((district, index) => {
-                // Offset markers slightly so they don't overlap
-                const offset = index * 0.3;
-                const lat = baseCoords[0] + Math.sin(index) * offset;
-                const lng = baseCoords[1] + Math.cos(index) * offset;
+                if (!district) {
+                    return {
+                        fillColor: '#cccccc',
+                        weight: 1,
+                        opacity: 1,
+                        color: '#666',
+                        fillOpacity: 0.3
+                    };
+                }
 
-                const color = this.getDistrictColor(district);
-                const marker = L.circleMarker([lat, lng], {
-                    radius: 8,
-                    fillColor: color,
-                    color: '#fff',
-                    weight: 2,
+                const fillColor = this.getDistrictColor(district);
+                const isSelected = this.selectedDistrictId === districtId;
+
+                return {
+                    fillColor: fillColor,
+                    weight: isSelected ? 3 : 1,
                     opacity: 1,
-                    fillOpacity: 0.7,
-                    districtId: district.id
-                });
+                    color: isSelected ? '#ffff00' : '#333',
+                    fillOpacity: 0.6
+                };
+            },
+            onEachFeature: (feature, layer) => {
+                const districtId = feature.properties.district;
+                const district = districtDataMap[districtId];
 
-                // Add popup
-                marker.bindPopup(this.createPopupContent(district));
+                if (district) {
+                    // Add popup
+                    layer.bindPopup(this.createPopupContent(district));
 
-                // Add click handler
-                marker.on('click', () => {
-                    this.selectDistrict(district.id);
-                });
-
-                // Add hover effects
-                marker.on('mouseover', function() {
-                    this.setStyle({
-                        fillOpacity: 0.9,
-                        radius: 10
+                    // Add click handler
+                    layer.on('click', () => {
+                        this.selectDistrict(districtId);
                     });
-                });
 
-                marker.on('mouseout', function() {
-                    this.setStyle({
-                        fillOpacity: 0.7,
-                        radius: 8
+                    // Add hover effects
+                    layer.on('mouseover', function(e) {
+                        const layer = e.target;
+                        layer.setStyle({
+                            weight: 3,
+                            fillOpacity: 0.8
+                        });
+                        if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+                            layer.bringToFront();
+                        }
                     });
-                });
 
-                marker.addTo(this.markersLayer);
-            });
-        });
+                    layer.on('mouseout', function(e) {
+                        this.geoJsonLayer.resetStyle(e.target);
+                    }.bind(this));
+                }
+            }
+        }).addTo(this.map);
 
         this.updateLegend();
-        console.log(`Map updated with ${districts.length} districts`);
+        console.log(`Map updated with ${districts.length} districts (GeoJSON boundaries)`);
     }
 
     getDistrictColor(district) {
         switch (this.vizMode) {
             case 'party':
+                if (!district.party || district.party === 'Unknown') {
+                    return '#999999'; // Gray for vacant seats
+                }
                 return district.party === 'Republican' ? '#E91D0E' : '#232066';
 
             case 'pvi':
@@ -181,7 +206,14 @@ export class MapManager {
     }
 
     createPopupContent(district) {
-        const pviClass = district.party === 'Republican' ? 'party-republican' : 'party-democratic';
+        let pviClass = '';
+        let partyDisplay = district.party || 'Vacant';
+
+        if (district.party === 'Republican') {
+            pviClass = 'party-republican';
+        } else if (district.party === 'Democratic') {
+            pviClass = 'party-democratic';
+        }
 
         return `
             <div class="district-popup">
@@ -196,7 +228,7 @@ export class MapManager {
                 </div>
                 <div class="popup-field">
                     <span class="popup-label">Party:</span>
-                    <span class="popup-value ${pviClass}">${district.party}</span>
+                    <span class="popup-value ${pviClass}">${partyDisplay}</span>
                 </div>
                 <div class="popup-field">
                     <span class="popup-label">Cook PVI:</span>

@@ -14,31 +14,35 @@ export class TableManager {
             data: [],
             columns: [
                 {
-                    data: 'id',
-                    title: 'District',
-                    width: '80px'
-                },
-                {
                     data: 'state',
                     title: 'State',
-                    width: '100px'
+                    width: '120px'
                 },
                 {
-                    data: 'party',
-                    title: 'Party',
-                    width: '90px',
-                    render: (data, type, row) => {
-                        if (type === 'display') {
-                            const badgeClass = data === 'Republican' ? 'republican' : 'democratic';
-                            return `<span class="party-badge ${badgeClass}">${data.charAt(0)}</span>`;
-                        }
-                        return data;
-                    }
+                    data: 'id',
+                    title: 'District',
+                    width: '90px'
                 },
                 {
                     data: 'representative',
                     title: 'Representative',
-                    width: '150px'
+                    width: '180px'
+                },
+                {
+                    data: 'party',
+                    title: 'Party',
+                    width: '110px',
+                    render: (data, type, row) => {
+                        if (type === 'display') {
+                            if (!data || data === 'Unknown') {
+                                return '<span class="party-badge vacant">Vacant</span>';
+                            }
+                            const badgeClass = data === 'Republican' ? 'republican' : 'democratic';
+                            const shortName = data === 'Republican' ? 'R' : 'D';
+                            return `<span class="party-badge ${badgeClass}">${shortName}</span> ${data}`;
+                        }
+                        return data || 'Vacant';
+                    }
                 },
                 {
                     data: 'pvi',
@@ -46,54 +50,58 @@ export class TableManager {
                     width: '80px',
                     render: (data, type, row) => {
                         if (type === 'display') {
+                            if (!data) return '<span class="null-value">—</span>';
                             const pviClass = row.pvi_numeric > 0 ? 'republican' :
                                            row.pvi_numeric < 0 ? 'democratic' : 'even';
                             return `<span class="pvi-value ${pviClass}">${data}</span>`;
                         }
                         // For sorting, use the numeric value
                         if (type === 'sort') {
-                            return row.pvi_numeric;
+                            return row.pvi_numeric || 0;
                         }
                         return data;
                     }
                 },
                 {
-                    data: 'demographics.population',
-                    title: 'Population',
-                    width: '100px',
+                    data: 'elections.2024.pres_margin',
+                    title: '2024 Margin (Presidential)',
+                    width: '140px',
                     render: (data, type) => {
                         if (type === 'display') {
-                            return this.dataLoader.formatNumber(data);
+                            if (data == null) return '<span class="null-value">—</span>';
+                            return `${data > 0 ? 'R+' : 'D+'}${Math.abs(data).toFixed(1)}`;
                         }
-                        return data;
+                        return data || 0;
+                    }
+                },
+                {
+                    data: 'elections.2024.house_margin',
+                    title: '2024 Margin (House)',
+                    width: '140px',
+                    render: (data, type) => {
+                        if (type === 'display') {
+                            if (data == null) return '<span class="null-value">—</span>';
+                            return `${data > 0 ? 'R+' : 'D+'}${Math.abs(data).toFixed(1)}`;
+                        }
+                        return data || 0;
                     }
                 },
                 {
                     data: 'demographics.median_income',
-                    title: 'Median Income',
-                    width: '120px',
-                    render: (data, type) => {
-                        if (type === 'display') {
-                            return this.dataLoader.formatCurrency(data);
-                        }
-                        return data;
-                    }
-                },
-                {
-                    data: 'elections.2024.margin',
-                    title: '2024 Margin',
+                    title: 'HHI',
                     width: '100px',
                     render: (data, type) => {
                         if (type === 'display') {
-                            return data ? `${data.toFixed(1)}%` : 'N/A';
+                            if (!data) return '<span class="null-value">—</span>';
+                            return this.dataLoader.formatCurrency(data);
                         }
-                        return data;
+                        return data || 0;
                     }
                 }
             ],
             pageLength: 25,
             lengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 100, 'All']],
-            order: [[0, 'asc']],
+            order: [[0, 'asc'], [1, 'asc']], // Sort by State, then District
             responsive: true,
             dom: '<"top"lf>rt<"bottom"ip><"clear">',
             language: {
@@ -105,8 +113,12 @@ export class TableManager {
                 zeroRecords: 'No matching districts found'
             },
             createdRow: (row, data) => {
-                // Add party class to row
-                $(row).addClass(`party-${data.party.toLowerCase()}`);
+                // Add party class to row (handle vacant districts with null party)
+                if (data.party) {
+                    $(row).addClass(`party-${data.party.toLowerCase()}`);
+                } else {
+                    $(row).addClass('party-vacant');
+                }
 
                 // Store district ID
                 $(row).attr('data-district-id', data.id);

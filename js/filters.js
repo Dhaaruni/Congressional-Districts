@@ -1,5 +1,6 @@
 // Filters Module
 // Handles filtering logic for districts based on various criteria
+console.log('✓ filters.js loaded - version with null party fix');
 
 export class FilterManager {
     constructor(dataLoader) {
@@ -113,8 +114,8 @@ export class FilterManager {
                 return false;
             }
 
-            // Party filter
-            if (!this.filters.parties.includes(district.party)) {
+            // Party filter - handle vacant seats (null party)
+            if (district.party && !this.filters.parties.includes(district.party)) {
                 return false;
             }
 
@@ -131,7 +132,7 @@ export class FilterManager {
                     district.id,
                     district.state,
                     district.representative,
-                    district.party
+                    district.party || 'Vacant'
                 ].join(' ').toLowerCase();
 
                 if (!searchableText.includes(query)) {

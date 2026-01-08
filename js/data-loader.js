@@ -11,7 +11,7 @@ export class DataLoader {
     async loadDistrictData() {
         this.loading = true;
         try {
-            const response = await fetch('data/sample-district-data.json');
+            const response = await fetch('data/district-data-no-geo.json');
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
@@ -29,10 +29,13 @@ export class DataLoader {
     async loadGeoJSON() {
         this.loading = true;
         try {
-            // For now, return null - we'll add GeoJSON later
-            // In the future, this will load from data/districts.geojson
-            console.log('GeoJSON loading not yet implemented - using fallback');
-            return null;
+            const response = await fetch('data/districts-boundaries-web.geojson');
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            this.geoJsonData = await response.json();
+            console.log(`Loaded GeoJSON with ${this.geoJsonData.features.length} district boundaries`);
+            return this.geoJsonData;
         } catch (error) {
             console.error('Error loading GeoJSON:', error);
             throw error;

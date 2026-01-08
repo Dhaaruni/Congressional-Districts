@@ -1,11 +1,11 @@
 // Main Application Module
 // Initializes and coordinates all components
 
-import { DataLoader } from './data-loader.js';
-import { MapManager } from './map.js';
-import { TableManager } from './table.js';
-import { SyncManager } from './sync.js';
-import { FilterManager } from './filters.js';
+import { DataLoader } from './data-loader.js?v=1767900164';
+import { MapManager } from './map.js?v=1767900164';
+import { TableManager } from './table.js?v=1767900164';
+import { SyncManager } from './sync.js?v=1767900164';
+import { FilterManager } from './filters.js?v=1767900164';
 
 class CongressionalDistrictsApp {
     constructor() {

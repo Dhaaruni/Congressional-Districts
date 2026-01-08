@@ -31,17 +31,20 @@ An interactive web application to explore and analyze all 435 U.S. Congressional
 **Working Features:**
 - ✅ Complete UI with responsive design
 - ✅ Interactive table with sorting and filtering
-- ✅ Interactive map with markers (using 10 sample districts)
+- ✅ Interactive map with actual congressional district boundaries (GeoJSON)
+- ✅ All 441 congressional districts (435 voting + 6 non-voting)
+- ✅ Current representatives for all districts (119th Congress)
 - ✅ Map-table synchronization (click one, highlights the other)
-- ✅ Party, state, and PVI filters
-- ✅ Multiple visualization modes
+- ✅ Party and state filters
+- ✅ Multiple visualization modes (party control)
 - ✅ Statistics dashboard
 
-**In Progress:**
-- 🔄 Full dataset (currently 10 sample districts)
-- 🔄 Actual congressional district boundaries (GeoJSON)
-- 🔄 Complete demographics data
+**To Be Added:**
+- 🔄 Cook PVI data for all districts
+- 🔄 Complete demographics data (Census API)
 - 🔄 Full election results (2020, 2022, 2024)
+- 🔄 PVI and income-based visualization modes (pending data)
+- 🔄 Election margin visualization (pending data)
 
 ## Getting Started
 

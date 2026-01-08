@@ -74,6 +74,17 @@
     background-color: var(--democratic-color);
 }
 
+.party-badge.vacant {
+    background-color: #999999;
+}
+
+/* Null value styling */
+.null-value {
+    color: #999999;
+    font-style: italic;
+    font-size: 0.9em;
+}
+
 /* PVI styling */
 .pvi-value {
     font-weight: 600;

@@ -24,3 +24,18 @@ test.html
 .idea/
 *.swp
 *.swo
+
+# Data processing files (keep only web-ready files)
+# Census shapefiles (source files)
+data/cb_2024_*.*
+data/*.zip
+# Large GeoJSON files
+data/cd119-full.geojson
+data/districts-boundaries.geojson
+data/districts-boundaries-simplified.geojson
+data/district-data.json
+# Working/intermediate files
+data/district-data-partial.json
+data/district-data-simple.json
+data/118th-congress-data.csv
+data/legislators-current.json
