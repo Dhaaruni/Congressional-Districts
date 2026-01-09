@@ -1,5 +1,5 @@
 {
-  "_note": "Partial dataset for all 441 congressional districts (119th Congress). Currently includes district boundaries and current representatives. PVI, demographics, and election data to be added incrementally.",
+  "_note": "Dataset for all 436 congressional districts (435 voting districts from 50 states + 1 non-voting district from DC). Includes district boundaries, current representatives, and 2025 Cook PVI data.",
   "districts": [
     {
       "id": "CA-50",
@@ -14885,47 +14885,6 @@
       }
     },
     {
-      "id": "GU-AL",
-      "state": "Guam",
-      "district": 0,
-      "name": "Delegate District (at Large)",
-      "party": "Republican",
-      "representative": "James (Jim) Moylan",
-      "pvi": null,
-      "pvi_numeric": null,
-      "demographics": {
-        "population": null,
-        "median_income": null,
-        "white_pct": null,
-        "black_pct": null,
-        "hispanic_pct": null,
-        "asian_pct": null,
-        "bachelor_degree_pct": null
-      },
-      "elections": {
-        "2024": {
-          "dem_pct": null,
-          "rep_pct": null,
-          "margin": null,
-          "turnout": null,
-          "pres_margin": null,
-          "house_margin": null
-        },
-        "2022": {
-          "dem_pct": null,
-          "rep_pct": null,
-          "margin": null,
-          "turnout": null
-        },
-        "2020": {
-          "dem_pct": null,
-          "rep_pct": null,
-          "margin": null,
-          "turnout": null
-        }
-      }
-    },
-    {
       "id": "CA-11",
       "state": "California",
       "district": 11,
@@ -16484,47 +16443,6 @@
       }
     },
     {
-      "id": "VI-AL",
-      "state": "U.S. Virgin Islands",
-      "district": 0,
-      "name": "Delegate District (at Large)",
-      "party": "Democratic",
-      "representative": "Stacey Plaskett",
-      "pvi": null,
-      "pvi_numeric": null,
-      "demographics": {
-        "population": null,
-        "median_income": null,
-        "white_pct": null,
-        "black_pct": null,
-        "hispanic_pct": null,
-        "asian_pct": null,
-        "bachelor_degree_pct": null
-      },
-      "elections": {
-        "2024": {
-          "dem_pct": null,
-          "rep_pct": null,
-          "margin": null,
-          "turnout": null,
-          "pres_margin": null,
-          "house_margin": null
-        },
-        "2022": {
-          "dem_pct": null,
-          "rep_pct": null,
-          "margin": null,
-          "turnout": null
-        },
-        "2020": {
-          "dem_pct": null,
-          "rep_pct": null,
-          "margin": null,
-          "turnout": null
-        }
-      }
-    },
-    {
       "id": "OK-01",
       "state": "Oklahoma",
       "district": 1,
@@ -16574,47 +16492,6 @@
       "representative": "Cliff Bentz",
       "pvi": "R+14",
       "pvi_numeric": 14,
-      "demographics": {
-        "population": null,
-        "median_income": null,
-        "white_pct": null,
-        "black_pct": null,
-        "hispanic_pct": null,
-        "asian_pct": null,
-        "bachelor_degree_pct": null
-      },
-      "elections": {
-        "2024": {
-          "dem_pct": null,
-          "rep_pct": null,
-          "margin": null,
-          "turnout": null,
-          "pres_margin": null,
-          "house_margin": null
-        },
-        "2022": {
-          "dem_pct": null,
-          "rep_pct": null,
-          "margin": null,
-          "turnout": null
-        },
-        "2020": {
-          "dem_pct": null,
-          "rep_pct": null,
-          "margin": null,
-          "turnout": null
-        }
-      }
-    },
-    {
-      "id": "AS-AL",
-      "state": "American Samoa",
-      "district": 0,
-      "name": "Delegate District (at Large)",
-      "party": "Republican",
-      "representative": "Aumua Amata Radewagen",
-      "pvi": null,
-      "pvi_numeric": null,
       "demographics": {
         "population": null,
         "median_income": null,
@@ -16853,47 +16730,6 @@
       }
     },
     {
-      "id": "MP-AL",
-      "state": "Northern Mariana Islands",
-      "district": 0,
-      "name": "Delegate District (at Large)",
-      "party": "Republican",
-      "representative": "Kimberlyn King-Hinds",
-      "pvi": null,
-      "pvi_numeric": null,
-      "demographics": {
-        "population": null,
-        "median_income": null,
-        "white_pct": null,
-        "black_pct": null,
-        "hispanic_pct": null,
-        "asian_pct": null,
-        "bachelor_degree_pct": null
-      },
-      "elections": {
-        "2024": {
-          "dem_pct": null,
-          "rep_pct": null,
-          "margin": null,
-          "turnout": null,
-          "pres_margin": null,
-          "house_margin": null
-        },
-        "2022": {
-          "dem_pct": null,
-          "rep_pct": null,
-          "margin": null,
-          "turnout": null
-        },
-        "2020": {
-          "dem_pct": null,
-          "rep_pct": null,
-          "margin": null,
-          "turnout": null
-        }
-      }
-    },
-    {
       "id": "TX-26",
       "state": "Texas",
       "district": 26,
@@ -16984,47 +16820,6 @@
       "representative": "Stephanie Bice",
       "pvi": "R+9",
       "pvi_numeric": 9,
-      "demographics": {
-        "population": null,
-        "median_income": null,
-        "white_pct": null,
-        "black_pct": null,
-        "hispanic_pct": null,
-        "asian_pct": null,
-        "bachelor_degree_pct": null
-      },
-      "elections": {
-        "2024": {
-          "dem_pct": null,
-          "rep_pct": null,
-          "margin": null,
-          "turnout": null,
-          "pres_margin": null,
-          "house_margin": null
-        },
-        "2022": {
-          "dem_pct": null,
-          "rep_pct": null,
-          "margin": null,
-          "turnout": null
-        },
-        "2020": {
-          "dem_pct": null,
-          "rep_pct": null,
-          "margin": null,
-          "turnout": null
-        }
-      }
-    },
-    {
-      "id": "PR-AL",
-      "state": "Puerto Rico",
-      "district": 0,
-      "name": "Resident Commissioner District (at Large)",
-      "party": "Democratic",
-      "representative": "Pablo Jos\u00e9 Hern\u00e1ndez Rivera",
-      "pvi": null,
-      "pvi_numeric": null,
       "demographics": {
         "population": null,
         "median_income": null,
