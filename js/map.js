@@ -235,10 +235,6 @@ export class MapManager {
                     <span class="popup-value">${district.pvi}</span>
                 </div>
                 <div class="popup-field">
-                    <span class="popup-label">Population:</span>
-                    <span class="popup-value">${this.dataLoader.formatNumber(district.demographics?.population)}</span>
-                </div>
-                <div class="popup-field">
                     <span class="popup-label">Median Income:</span>
                     <span class="popup-value">${this.dataLoader.formatCurrency(district.demographics?.median_income)}</span>
                 </div>
