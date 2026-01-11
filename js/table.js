@@ -78,12 +78,23 @@ export class TableManager {
                     data: 'elections.2024.house_margin',
                     title: '2024 Margin (House)',
                     width: '140px',
-                    render: (data, type) => {
+                    render: (data, type, row) => {
                         if (type === 'display') {
                             if (data == null) return '<span class="null-value">—</span>';
+                            // Handle N/A values (uncontested or open seats)
+                            if (data === 'N/A' || typeof data === 'string') {
+                                if (!row.representative || row.representative === 'Vacant') {
+                                    return '<span class="null-value">OPEN</span>';
+                                }
+                                return '<span class="null-value">Uncontested</span>';
+                            }
                             return `${data > 0 ? 'R+' : 'D+'}${Math.abs(data).toFixed(1)}`;
                         }
-                        return data || 0;
+                        // For sorting, treat N/A as 0
+                        if (type === 'sort') {
+                            return typeof data === 'number' ? data : 0;
+                        }
+                        return typeof data === 'number' ? data : 0;
                     }
                 },
                 {
