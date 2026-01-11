@@ -45,35 +45,31 @@ export class TableManager {
                     }
                 },
                 {
-                    data: 'pvi',
+                    data: 'pvi_numeric',
                     title: 'PVI',
                     width: '80px',
+                    type: 'num',
                     render: (data, type, row) => {
                         if (type === 'display') {
-                            if (!data) return '<span class="null-value">—</span>';
-                            const pviClass = row.pvi_numeric > 0 ? 'republican' :
-                                           row.pvi_numeric < 0 ? 'democratic' : 'even';
-                            return `<span class="pvi-value ${pviClass}">${data}</span>`;
+                            if (!row.pvi) return '<span class="null-value">—</span>';
+                            const pviClass = data > 0 ? 'republican' :
+                                           data < 0 ? 'democratic' : 'even';
+                            return `<span class="pvi-value ${pviClass}">${row.pvi}</span>`;
                         }
-                        // For sorting, use the numeric value
-                        if (type === 'sort') {
-                            return row.pvi_numeric || 0;
-                        }
-                        return data;
+                        // For sorting, use the numeric value directly
+                        return data || 0;
                     }
                 },
                 {
                     data: 'elections.2024.pres_margin',
                     title: '2024 Margin (Presidential)',
                     width: '140px',
+                    type: 'num',
                     render: (data, type) => {
                         if (type === 'display') {
                             if (data == null) return '<span class="null-value">—</span>';
                             const marginClass = data > 0 ? 'republican' : 'democratic';
                             return `<span class="margin-value ${marginClass}">${data > 0 ? 'R+' : 'D+'}${Math.abs(data).toFixed(1)}</span>`;
-                        }
-                        if (type === 'sort') {
-                            return data || 0;
                         }
                         return data || 0;
                     }
@@ -82,6 +78,7 @@ export class TableManager {
                     data: 'elections.2024.house_margin',
                     title: '2024 Margin (House)',
                     width: '140px',
+                    type: 'num',
                     render: (data, type, row) => {
                         if (type === 'display') {
                             if (data == null) return '<span class="null-value">—</span>';
@@ -96,9 +93,6 @@ export class TableManager {
                             return `<span class="margin-value ${marginClass}">${data > 0 ? 'R+' : 'D+'}${Math.abs(data).toFixed(1)}</span>`;
                         }
                         // For sorting, treat N/A as 0
-                        if (type === 'sort') {
-                            return typeof data === 'number' ? data : 0;
-                        }
                         return typeof data === 'number' ? data : 0;
                     }
                 },
@@ -106,13 +100,11 @@ export class TableManager {
                     data: 'demographics.median_income',
                     title: 'HHI',
                     width: '100px',
+                    type: 'num',
                     render: (data, type) => {
                         if (type === 'display') {
                             if (!data) return '<span class="null-value">—</span>';
                             return this.dataLoader.formatCurrency(data);
-                        }
-                        if (type === 'sort') {
-                            return data || 0;
                         }
                         return data || 0;
                     }
