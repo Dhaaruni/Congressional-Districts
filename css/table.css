@@ -102,6 +102,19 @@
     color: var(--neutral-color);
 }
 
+/* Margin value styling */
+.margin-value {
+    font-weight: 600;
+}
+
+.margin-value.republican {
+    color: var(--republican-color);
+}
+
+.margin-value.democratic {
+    color: var(--democratic-color);
+}
+
 /* DataTables controls */
 .dataTables_wrapper .dataTables_length,
 .dataTables_wrapper .dataTables_filter,

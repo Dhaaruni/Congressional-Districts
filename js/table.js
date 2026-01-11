@@ -69,7 +69,11 @@ export class TableManager {
                     render: (data, type) => {
                         if (type === 'display') {
                             if (data == null) return '<span class="null-value">—</span>';
-                            return `${data > 0 ? 'R+' : 'D+'}${Math.abs(data).toFixed(1)}`;
+                            const marginClass = data > 0 ? 'republican' : 'democratic';
+                            return `<span class="margin-value ${marginClass}">${data > 0 ? 'R+' : 'D+'}${Math.abs(data).toFixed(1)}</span>`;
+                        }
+                        if (type === 'sort') {
+                            return data || 0;
                         }
                         return data || 0;
                     }
@@ -88,7 +92,8 @@ export class TableManager {
                                 }
                                 return '<span class="null-value">Uncontested</span>';
                             }
-                            return `${data > 0 ? 'R+' : 'D+'}${Math.abs(data).toFixed(1)}`;
+                            const marginClass = data > 0 ? 'republican' : 'democratic';
+                            return `<span class="margin-value ${marginClass}">${data > 0 ? 'R+' : 'D+'}${Math.abs(data).toFixed(1)}</span>`;
                         }
                         // For sorting, treat N/A as 0
                         if (type === 'sort') {
@@ -105,6 +110,9 @@ export class TableManager {
                         if (type === 'display') {
                             if (!data) return '<span class="null-value">—</span>';
                             return this.dataLoader.formatCurrency(data);
+                        }
+                        if (type === 'sort') {
+                            return data || 0;
                         }
                         return data || 0;
                     }
