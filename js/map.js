@@ -240,7 +240,7 @@ export class MapManager {
                 </div>
                 <div class="popup-field">
                     <span class="popup-label">2024 Margin:</span>
-                    <span class="popup-value">${district.elections?.['2024']?.margin?.toFixed(1)}%</span>
+                    <span class="popup-value" style="color: ${district.elections?.['2024']?.pres_margin >= 0 ? '#E91D0E' : '#232066'}; font-weight: bold;">${district.elections?.['2024']?.pres_margin != null ? (district.elections['2024'].pres_margin >= 0 ? 'R+' : 'D+') + Math.abs(district.elections['2024'].pres_margin).toFixed(1) + '%' : 'N/A'}</span>
                 </div>
             </div>
         `;
